@@ -1,3 +1,5 @@
+# Settings for the discord bot
+import psutil, platform
 import os
 import logging
 from pathlib import Path
@@ -6,14 +8,14 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+# ! Linux users might have to set both of these globals manualy
 BOT_TOKEN, BOT_PREFIX = os.getenv('BOT_TOKEN'), os.getenv('BOT_PREFIX')
 
-OWNER = 435421256028782603
+OWNER = [435421256028782603]
 
 BASE_DIR = Path(__file__).parent
 COG_DIR = BASE_DIR / "cogs"
 
-# ! don't use this; not finished
 LOGGING_CONFIG = {
     "version": 1,
     "disabled_existing_loggers": False,
@@ -56,7 +58,7 @@ LOGGING_CONFIG = {
     },
 }
 
-VER = 1.0
+VER = "1.1"
 DD_LOGO = f"""
 \u001b[38;5;214m======================================================================================
 \u001b[38;5;92m      d8b                      d8b             d8b                                    
@@ -69,5 +71,21 @@ d8P' ?88  d8P' ?88    88P' ?8b  888bd8P' d8P' ?88  d8P' ?88  88P' ?8bd88   88   
 
 \u001b[38;5;214m Made by Deludank                                                       Version : {VER}
 ======================================================================================\u001b[0m \n"""
+
+
+def getSysInfo():
+    info = f"""
+
+```ansi
+[2;34m[2;45m[2;37mDankDonut v{VER}
+[0m[2;34m[2;45m[0m[2;34m[0m[1;2m[1;2m[1;34mHardware Info:
+[0m[0m[1;34m    OS:[0m[0m[2;34m[2;34m[0m[2;34m[0m [2;32m{platform.platform()}
+[2;34m[1;34m    CPU:[0m[2;34m[0m[2;32m {platform.processor()} [2;36m@[0m[2;32m {psutil.cpu_freq().max} GHz [0m[2;34m[2;34m[1;34m{psutil.cpu_count(logical=False)} Cores[0m[2;34m[0m[2;34m[0m; [2;34m[1;34m{psutil.cpu_count(logical=True)} Threads[0m[2;34m[0m
+[2;32m    [0m    [2;33m{psutil.cpu_percent(interval=1)}% average usage.[0m
+[2;34m[1;34m    RAM:[0m[2;34m[0m [2;33m[2;32m{psutil.virtual_memory().percent}% used of [0m[2;33m[0m[2;33m[2;33m{round(psutil.virtual_memory().total/1000000000, 2)} GB[0m[2;33m[0m
+
+```
+"""
+    return info
 
 dictConfig(LOGGING_CONFIG)
