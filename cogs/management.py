@@ -29,7 +29,7 @@ class Management(commands.Cog):
 
     @commands.command(
         help="Delete X amount of messages. Maximum of 25.",
-        brief="Delete messages."
+        brief="Delete messages.", aliases=['del']
         )
     @commands.has_permissions(administrator=True)
     @commands.guild_only()
