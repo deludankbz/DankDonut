@@ -1,2 +1,2 @@
 # DankDonut
- A Discord bot made for
+## A bad discord bot.
