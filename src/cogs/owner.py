@@ -14,7 +14,9 @@ class Owner(commands.Cog):
 
 
     # NOTE: @commands.is_owner() doesn't work
-    @commands.command()
+    @commands.command(
+        help="Show bot's machine info."
+    )
     async def info(self, ctx):
         author = ctx.message.author
         if author.id in settings.OWNER:
