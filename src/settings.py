@@ -88,7 +88,12 @@ def getSysInfo():
     return info
 
 def restart():
-    """ For anyone curious, `os.execv()` replaces the current process with new one """
+    """ Restarts the bot fully """
+    # NOTE: For anyone curious, `os.execv()` replaces the current process with new one 
     os.execv(sys.executable, ['python3'] + sys.argv)
+
+def update():
+    """ Update the bot's files using `git pull` """
+    os.system("git pull")
 
 dictConfig(LOGGING_CONFIG)
