@@ -1,3 +1,4 @@
+# Copyright (c) 2025 deludank. All Rights Reserved.
 import sys
 for i in range(0, 16):
     for j in range(0, 16):

@@ -1,14 +1,16 @@
+# Copyright (c) 2025 deludank. All Rights Reserved.
 import discord
-import settings
 from discord.ext import commands
 from datetime import datetime
+
+import settings
 
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix=str(settings.BOT_PREFIX), intents=intents, owner_ids=str(settings.OWNER))
 startTime = datetime.now()
 logger = settings.logging.getLogger("bot")
 
-# print(settings.BOT_PREFIX, settings.BOT_TOKEN)
+print(settings.DD_LOGO)
 
 def run():
     @bot.event
@@ -35,4 +37,3 @@ def run():
 
 if __name__ == "__main__":
     run()
-

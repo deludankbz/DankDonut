@@ -1,3 +1,4 @@
+# Copyright (c) 2025 deludank. All Rights Reserved.
 # Settings for the discord bot
 import psutil, platform
 import os
@@ -75,7 +76,6 @@ d8P' ?88  d8P' ?88    88P' ?8b  888bd8P' d8P' ?88  d8P' ?88  88P' ?8bd88   88   
 
 def getSysInfo():
     info = f"""
-
 ```ansi
 [2;34m[2;45m[2;37mDankDonut v{VER}
 [0m[2;34m[2;45m[0m[2;34m[0m[1;2m[1;2m[1;34mHardware Info:

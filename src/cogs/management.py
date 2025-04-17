@@ -1,3 +1,4 @@
+# Copyright (c) 2025 deludank. All Rights Reserved.
 from time import sleep
 import discord
 import settings

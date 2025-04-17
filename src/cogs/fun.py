@@ -1,9 +1,11 @@
+# Copyright (c) 2025 deludank. All Rights Reserved.
 # For network commands.
 import discord
-import settings
 import requests
 import random 
 from discord.ext import commands
+
+import settings
 
 logger = settings.logging.getLogger("bot")
 
@@ -31,10 +33,8 @@ class Fun(commands.Cog):
         brief="Get user avatar."
     )
     async def avatar(self, ctx, user: discord.Member = None):
-        if user != None:
-            msgAuthor = user
-        else:
-            msgAuthor = ctx.message.author
+        if user != None: msgAuthor = user
+        else: msgAuthor = ctx.message.author
         embed=discord.Embed(title=f"{msgAuthor.name}'s avatar", url=f"{msgAuthor.avatar.url}", color=0x794fee)
         embed.set_image(url=msgAuthor.avatar.url)
         embed.set_footer(text="DankDonut")

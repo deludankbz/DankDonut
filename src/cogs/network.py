@@ -1,5 +1,5 @@
+# Copyright (c) 2025 deludank. All Rights Reserved.
 # For network commands.
-
 import settings
 from discord.ext import commands
 
