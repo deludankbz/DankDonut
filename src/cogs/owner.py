@@ -1,5 +1,6 @@
-# Copyright (c) 2025 deludank. All Rights Reserved.
+# ^}Copyright (c) 2025 deludank. All Rights Reserved.
 
+import os
 from discord.ext import commands
 from main import startTime
 from datetime import datetime
@@ -58,8 +59,10 @@ class Owner(commands.Cog):
     async def reload(self, ctx, arg = None):
         author = ctx.message.author
         if author.id in settings.OWNER: 
+            os.system("clear")
             if arg == "update": settings.update()
             await ctx.send("Restarting and updating bot ..." if arg != None else "Restarting bot ...")
+            logger.info("Restarting and updating bot." if arg != None else "Restarting bot.")
             settings.restart()
 
 
