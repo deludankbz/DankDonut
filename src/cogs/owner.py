@@ -15,7 +15,6 @@ class Owner(commands.Cog):
 
     # NOTE: @commands.is_owner() doesn't work
     @commands.command()
-    @commands.dm_only()
     async def info(self, ctx):
         author = ctx.message.author
         if author.id in settings.OWNER:
