@@ -4,9 +4,11 @@ from discord.ext import commands
 from datetime import datetime
 
 intents = discord.Intents.all()
-bot = commands.Bot(command_prefix=settings.BOT_PREFIX, intents=intents, owner_ids=settings.OWNER)
-startTime = datetime.utcnow()
+bot = commands.Bot(command_prefix=str(settings.BOT_PREFIX), intents=intents, owner_ids=str(settings.OWNER))
+startTime = datetime.now()
 logger = settings.logging.getLogger("bot")
+
+# print(settings.BOT_PREFIX, settings.BOT_TOKEN)
 
 def run():
     @bot.event
@@ -24,12 +26,13 @@ def run():
             if cogs.name != "__init__.py":
                 await bot.load_extension(f"cogs.{cogs.name[:-3]}")
                 logger.info(f"Extension: '{cogs.name[:-3]}' loaded.")
-        
+
         logger.info(f"All good!")
 
-    bot.run(settings.BOT_TOKEN, root_logger=True)
+    bot.run(str(settings.BOT_TOKEN), root_logger=True)
 
 # TODO: Could do some configuration function here
 
 if __name__ == "__main__":
     run()
+
