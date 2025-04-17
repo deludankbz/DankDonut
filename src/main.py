@@ -1,4 +1,9 @@
 # Copyright (c) 2025 deludank. All Rights Reserved.
+
+# TODO:
+#   Hot reload system for this bot with git
+#   find a better way of loading the cogs
+
 import discord
 from discord.ext import commands
 from datetime import datetime
@@ -10,19 +15,16 @@ bot = commands.Bot(command_prefix=str(settings.BOT_PREFIX), intents=intents, own
 startTime = datetime.now()
 logger = settings.logging.getLogger("bot")
 
-print(settings.DD_LOGO)
-
 def run():
+    
     @bot.event
     async def on_ready():
         await bot.change_presence(status=discord.Status.idle)
-        # Console stuff
+
         print(settings.DD_LOGO)
         logger.info(f"{bot.user} is ready!")
 
         # Only use cogs for commands
-        # ! This might not work everytime since it's an async process
-        # TODO: find a better way of loading the cogs
         logger.info(f"Loading extensions...")
         for cogs in settings.COG_DIR.glob("*.py"):
             if cogs.name != "__init__.py":
@@ -32,8 +34,6 @@ def run():
         logger.info(f"All good!")
 
     bot.run(str(settings.BOT_TOKEN), root_logger=True)
-
-# TODO: Could do some configuration function here
 
 if __name__ == "__main__":
     run()

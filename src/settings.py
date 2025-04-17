@@ -1,7 +1,6 @@
 # Copyright (c) 2025 deludank. All Rights Reserved.
 # Settings for the discord bot
-import psutil, platform
-import os
+import psutil, platform, os, sys
 import logging
 from pathlib import Path
 from logging.config import dictConfig
@@ -87,5 +86,9 @@ def getSysInfo():
 ```
 """
     return info
+
+def restart():
+    """ For anyone curious, `os.execv()` replaces the current process with new one """
+    os.execv(sys.executable, ['python3'] + sys.argv)
 
 dictConfig(LOGGING_CONFIG)
