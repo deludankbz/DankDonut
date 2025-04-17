@@ -55,11 +55,10 @@ class Owner(commands.Cog):
     @commands.command(
         help="Full bot reload."
     )
-    async def reload(self, ctx, arg):
+    async def reload(self, ctx, arg = None):
         author = ctx.message.author
         if author.id in settings.OWNER: 
-            if arg == "update": 
-                settings.update()
+            if arg == "update": settings.update()
             await ctx.send("Restarting bot...")
             settings.restart()
 
