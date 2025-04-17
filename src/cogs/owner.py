@@ -59,7 +59,7 @@ class Owner(commands.Cog):
         author = ctx.message.author
         if author.id in settings.OWNER: 
             if arg == "update": settings.update()
-            await ctx.send("Restarting bot...")
+            await ctx.send("Restarting and updating bot ..." if arg != None else "Restarting bot ...")
             settings.restart()
 
 
