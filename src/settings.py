@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ! Linux users might have to set both of these globals manualy
-BOT_TOKEN, BOT_PREFIX = os.getenv('BOT_TOKEN'), os.getenv('BOT_PREFIX')
+BOT_TOKEN, BOT_PREFIX = os.getenv('BOT_TOKEN'), "?"
 
 OWNER = [435421256028782603]
 
