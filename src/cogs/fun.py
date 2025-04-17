@@ -20,12 +20,12 @@ class Fun(commands.Cog):
         if resp.status_code == 200:
             # returns a list
             text = resp.text
-            embed=discord.Embed(title="😎 I've got an amazing number fact", color=0x1874ec)
+            embed=discord.Embed(title="😎 please die", color=0x1874ec)
             embed.add_field(name="", value=f"```{text}```", inline=True)
             embed.set_footer(text=f"🌐 Source : http://numbersapi.com/")
             await ctx.send(embed=embed)
         else:
-            await ctx.send(f"🙄 Sorry, the calculator says : `Can't divide by 0`")
+            await ctx.send(f"🙄 BRO CHILL THE FUCK OUT; that number is too high :shamrock:")
 
     # TODO: Fix not being able to fetch an user's avatar if he's outside of the current guild.
     @commands.command(
@@ -41,7 +41,7 @@ class Fun(commands.Cog):
         await ctx.send(f"{ctx.message.author.mention}")
         await ctx.send(embed=embed)
 
-    # New command: get a random fact
+
     @commands.command(
         help="Shows a random fact",
         brief="Get a random fact.",
@@ -53,14 +53,14 @@ class Fun(commands.Cog):
         if resp.status_code == 200:
             # returns a list
             text, source = resp.json()["text"], resp.json()["source_url"]
-            embed=discord.Embed(title="😎 I've got an amazing fact", color=0x1874ec)
+            embed=discord.Embed(title="😎 fuck you", color=0x1874ec)
             embed.add_field(name="", value=f"```{text}```", inline=True)
             embed.set_footer(text=f"🌐 Source : {source}")
             await ctx.send(embed=embed)
         else:
-            await ctx.send(f"🙄 Sorry, mistakes were made.")
+            await ctx.send(f"🙄 Sorry, mistakes were made. You")
 
-    # New command: get a number fact:
+
     @commands.command(
         help="Shows a random fact",
         brief="Get a random fact.",
