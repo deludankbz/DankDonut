@@ -8,6 +8,7 @@ from datetime import datetime
 import settings
 
 logger = settings.logging.getLogger("bot")
+
 class Owner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -55,15 +56,16 @@ class Owner(commands.Cog):
 
 
     @commands.command(
-        help="Full bot reload."
+        help="Full bot reload.",
+        aliases=['r']
     )
     async def reload(self, ctx, arg = None):
         author = ctx.message.author
         if author.id in settings.OWNER: 
             os.system("clear")
             if arg == "update": settings.update()
-            await ctx.send("Restarting and updating bot ..." if arg != None else "Restarting bot ...")
-            logger.info("Restarting and updating bot." if arg != None else "Restarting bot.")
+            await ctx.send("Restarting and updating bot ..." if arg is not None else "Restarting bot ...")
+            logger.info("Restarting and updating bot." if arg is not None else "Restarting bot.")
             settings.restart()
 
 

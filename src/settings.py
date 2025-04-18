@@ -14,6 +14,9 @@ BOT_TOKEN, BOT_PREFIX = os.getenv('BOT_TOKEN'), "?"
 OWNER = [435421256028782603]
 
 BASE_DIR = Path(__file__).parent
+# TODO: concatenate this with os.path()
+CHATSOUNDS_DIR = 'extra/chatsounds/'
+
 COG_DIR = BASE_DIR / "cogs"
 
 LOGGING_CONFIG = {

@@ -71,25 +71,6 @@ class Fun(commands.Cog):
     async def numfact(self, ctx, numArg: int):
         await self.makeRequest(ctx, numArg)
 
-
-    @commands.command(hidden=True)
-    async def join(self, ctx, *, channel: discord.VoiceChannel):
-        """ Joins a voice channel """
-
-        if ctx.voice_client is not None:
-            return await ctx.voice_client.move_to(channel)
-
-        await channel.connect()
-
-
-    @commands.command(hidden=True)
-    async def quit(self, ctx, *, channel: discord.VoiceClient):
-        """ Quits a voice channel """
-
-        if channel.is_connected():
-            return await channel.disconnect()
-        await ctx.send(f"Counldn't quit")
-
     # @commands.command(
     #     help="Search a term in Urban",
     #     brief="???",
