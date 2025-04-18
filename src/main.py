@@ -3,6 +3,7 @@
 # TODO:
 #   Hot reload system for this bot with git
 #   find a better way of loading the cogs
+#   logger seems to be not working for these loggings
 
 import discord
 from discord.ext import commands
