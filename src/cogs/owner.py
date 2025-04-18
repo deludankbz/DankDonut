@@ -90,14 +90,12 @@ class Owner(commands.Cog):
         help="Generate bot documentation",
         aliases=['gd']
     )
-    async def generatedoc(self, ctx):
-        author = ctx.message.author
+    async def generatedoc(self, mapping):
         coglist = list()
-        if author.id in settings.OWNER: 
-            for cog, cmds in ctx.items():  # get the cog and its commands separately
-                coglist.append(cog.qualified_name)       # get the cog name
+        for cog in mapping:
+            coglist.append(cog.qualified_name)
 
-            await ctx.send(coglist)
+        await self.bot.get_destination().send(coglist)
 
 
 async def setup(bot): await bot.add_cog(Owner(bot))
