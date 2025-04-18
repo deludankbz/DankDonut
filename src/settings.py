@@ -45,7 +45,7 @@ LOGGING_CONFIG = {
             "level": "INFO",
             "class": "logging.FileHandler",
             "filename": "logs/infos.log",
-            "mode": "w",
+            "mode": "a",
             "formatter": "verbose",
         },
     },
