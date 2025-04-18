@@ -14,16 +14,12 @@ class ChatSounds(commands.Cog):
 
 
     @commands.command(
-        help="This enters the ctx.message.author.voice.channel, plays a selected sound and quits.",
+        help="Plays the selected ChatSound in voicechat on which the author is connected.",
         pass_context=True,
         aliases=["ab"]
         )
     async def abobinha(self, ctx, soundname):
         """ This enters the ctx.message.author.voice.channel, plays a selected sound and quits. """
-
-        async def _quit():
-            voice = ctx.message.guild.voice_client
-            await voice.disconnect()
 
         soundfiles = glob.glob(f"{settings.CHATSOUNDS_DIR}*")
 
