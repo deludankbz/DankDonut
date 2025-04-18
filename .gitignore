@@ -152,4 +152,5 @@ cython_debug/
 #.idea/
 
 # Bot stuff
+*.mp3
 extra/chatsounds/*
