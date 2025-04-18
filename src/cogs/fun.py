@@ -1,6 +1,7 @@
 # Copyright (c) 2025 deludank. All Rights Reserved.
 # For network commands.
 import discord
+from discord.state import Channel
 import requests
 import random 
 from discord.ext import commands
@@ -14,6 +15,7 @@ class Fun(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+
     async def makeRequest(self, ctx, num):
         numFactUrl = f"http://numbersapi.com/{num}"
         resp = requests.get(numFactUrl)
@@ -26,6 +28,7 @@ class Fun(commands.Cog):
             await ctx.send(embed=embed)
         else:
             await ctx.send(f"🙄 BRO CHILL THE FUCK OUT; that number is too high :shamrock:")
+
 
     # TODO: Fix not being able to fetch an user's avatar if he's outside of the current guild.
     @commands.command(
@@ -68,6 +71,25 @@ class Fun(commands.Cog):
     )
     async def numfact(self, ctx, numArg: int):
         await self.makeRequest(ctx, numArg)
+
+
+    @commands.command(hidden=True)
+    async def join(self, ctx, *, channel: discord.VoiceChannel):
+        """ Joins a voice channel """
+
+        if ctx.voice_client is not None:
+            return await ctx.voice_client.move_to(channel)
+
+        await channel.connect()
+
+
+    @commands.command(hidden=True)
+    async def quit(self, ctx, *, channel: discord.VoiceClient):
+        """ Quits a voice channel """
+
+        if channel.is_connected():
+            return await channel.disconnect()
+        await ctx.send(f"Counldn't quit")
 
     # @commands.command(
     #     help="Search a term in Urban",
