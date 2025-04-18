@@ -25,6 +25,17 @@ class Owner(commands.Cog):
 
 
     @commands.command(
+        help="Show bot's machine info.",
+        aliases=["s"]
+    )
+    async def show(self, ctx):
+        author = ctx.message.author
+        if author.id in settings.OWNER:
+            await self.bot.send_file(ctx.message.channel, "logs/infos.log", filename="log", content="bot info logs")
+            await ctx.send(settings.getSysInfo())
+
+
+    @commands.command(
         help="Shows who owns this bot.",
         brief="Show bot owner."
     )
