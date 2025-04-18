@@ -1,6 +1,10 @@
 # ^}Copyright (c) 2025 deludank. All Rights Reserved.
 
-import os
+# TODO:
+#   show:
+#      show metrics like ping etc... 
+
+import os, discord
 from discord.ext import commands
 from main import startTime
 from datetime import datetime
@@ -31,8 +35,9 @@ class Owner(commands.Cog):
     async def show(self, ctx):
         author = ctx.message.author
         if author.id in settings.OWNER:
-            await self.bot.send_file(ctx.message.channel, "logs/infos.log", filename="log", content="bot info logs")
-            await ctx.send(settings.getSysInfo())
+            await ctx.send(f"## :computer: System info {settings.getSysInfo()}")
+            await ctx.send(f"## :notepad_spiral: Info logs about the bot", file=discord.File(r'logs/infos.log'))
+            await ctx.send(f"### :ping_pong: Latency `{str(self.bot.latency)[:4]} ms`")
 
 
     @commands.command(
