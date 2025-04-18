@@ -1,7 +1,6 @@
 # Copyright (c) 2025 deludank. All Rights Reserved.
 # For network commands.
 import discord
-from discord.state import Channel
 import requests
 import random 
 from discord.ext import commands
