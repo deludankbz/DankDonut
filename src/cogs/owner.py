@@ -1,4 +1,4 @@
-# ^}Copyright (c) 2025 deludank. All Rights Reserved.
+# Copyright (c) 2025 deludank. All Rights Reserved.
 
 # TODO:
 #   show:
@@ -84,18 +84,6 @@ class Owner(commands.Cog):
             logger.info("Restarting and updating bot." if arg is not None else "Restarting bot.")
             settings.restart()
 
-
-    @commands.command(
-        hidden="True",
-        help="Generate bot documentation",
-        aliases=['gd']
-    )
-    async def generatedoc(self, mapping):
-        coglist = list()
-        for cog in mapping:
-            coglist.append(cog.qualified_name)
-
-        await self.bot.get_destination().send(coglist)
 
 
 async def setup(bot): await bot.add_cog(Owner(bot))
