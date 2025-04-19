@@ -20,7 +20,7 @@ def run():
     
     @bot.event
     async def on_ready():
-        await bot.change_presence(status=discord.Status.idle)
+        await bot.change_presence(activity=discord.Game(name="?help: deludankbz.github.io/dankpage/"), status=discord.Status.idle)
 
         print(settings.DD_LOGO)
         logger.info(f"{bot.user} is ready!")
