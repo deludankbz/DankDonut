@@ -121,9 +121,8 @@ def gendocs(aSortedCMD: list) -> list[str]:
             htmlCommandTemplate = f"""
 <!-- {line.name}@{line.cog_name} -->
 <div class="command-content">
-    <p class="name">{line.name}</p>
+    <p class="name">{line.name} <span class="aliases">{line.aliases if len(line.aliases) != 0 else ""}</span></p>
     <div class="desc">
-        <p class="aliases">{line.aliases if len(line.aliases) != 0 else ""}</p>
         <p class="cog">{line.cog_name}</p>
         <p class="help">{line.help}</p>
     </div>
