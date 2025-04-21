@@ -8,17 +8,21 @@ import settings
 
 logger = settings.logging.getLogger("bot")
 
+# TODO:
+#     @annoy:
+#     errors related to voice chat; handle that shit 
+#     make it quit after playing sound
+
 class ChatSounds(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
     @commands.command(
         help="Plays the selected ChatSound in voicechat on which the author is connected.",
         pass_context=True,
-        aliases=["ab"]
+        aliases=["an"]
         )
-    async def abobinha(self, ctx, soundname):
+    async def annoy(self, ctx, soundname):
         """ This enters the ctx.message.author.voice.channel, plays a selected sound and quits. """
 
         soundfiles = glob.glob(f"{settings.CHATSOUNDS_DIR}*")
@@ -36,22 +40,23 @@ class ChatSounds(commands.Cog):
                     voice_client.play(discord.FFmpegPCMAudio(source=sound))
 
 
+    # @commands.command(
+    #     help="Joins the same voice channel on which the author is connected",
+    #     hidden=True, 
+    #     pass_context=True,
+    #     aliases=["j"]
+    # )
+    # async def join(self, ctx):
+    #     """ Joins a voice channel """
+    #
+    #     if ctx.author.voice:
+    #         channel = ctx.message.author.voice.channel
+    #         return await channel.connect()
+
+
     @commands.command(
-        help="Joins the same voice channel on which the author is connected",
-        hidden=True, 
-        pass_context=True,
-        aliases=["j"]
-    )
-    async def join(self, ctx):
-        """ Joins a voice channel """
-
-        if ctx.author.voice:
-            channel = ctx.message.author.voice.channel
-            return await channel.connect()
-
-
-    @commands.command(
-        help="If connected to a voice channel; the bot will exit the current voice channel",
+        help="If connected to a voice channel; the bot will exit it.",
+        brief="Disconnect from a voice channel.",
         hidden=True,
         aliases=["q"]
     )

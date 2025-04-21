@@ -1,5 +1,6 @@
 # Copyright (c) 2025 deludank. All Rights Reserved.
-# Settings for the discord bot
+# Standard settings for the bot
+
 import psutil, platform, os, sys
 import logging
 from pathlib import Path
@@ -8,26 +9,29 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ! Linux users might have to set both of these globals manualy
-BOT_TOKEN, BOT_PREFIX = os.getenv('BOT_TOKEN'), "?"
-
+# OWNERSHIP
 OWNER = [435421256028782603]
 
-BASE_DIR = Path(__file__).parent
-# TODO: concatenate this with os.path()
+# TOKENS
+BOT_TOKEN = os.getenv('BOT_TOKEN')
+BOT_PREFIX = "?"
+
+# DIRS
+# NOTE: unfortunally this path has to be like this due to glob
+BASE_DIR = Path(__file__).parent 
+COG_DIR = BASE_DIR / "cogs/"
 CHATSOUNDS_DIR = 'extra/chatsounds/'
 
-COG_DIR = BASE_DIR / "cogs"
-
+# LOGGING
 LOGGING_CONFIG = {
     "version": 1,
     "disabled_existing_loggers": False,
     "formatters": {
         "verbose": {
-            "format": "[%(levelname)s] : ( %(asctime)s ) - ( Module @ %(module)s ): %(message)s"
+            "format": "[%(levelname)s] : ( %(asctime)s - Module @ %(module)s ): %(message)s"
         },
         "standard": {
-            "format": "[%(levelname)s] - ( Name : %(name)s ) : %(message)s"
+            "format": "[ %(levelname)s@%(name)s ] :: %(message)s"
             },
     },
     "handlers": {
@@ -51,7 +55,9 @@ LOGGING_CONFIG = {
     },
     "loggers": {
         "bot": {
-            "handlers": ["console"], "level": "INFO", "propagate": False
+            "handlers": ["console"], 
+            "level": "INFO", 
+            "propagate": False
             },
         "discord": {
             "handlers": ["console2", "file"],
@@ -76,6 +82,7 @@ d8P' ?88  d8P' ?88    88P' ?8b  888bd8P' d8P' ?88  d8P' ?88  88P' ?8bd88   88   
 \u001b[38;5;214m Made by Deludank                                                       Version : {VER}
 ======================================================================================\u001b[0m \n"""
 
+gendocsPath = os.path.join(os.getcwd(), 'logs/gendocs.html')
 
 def getSysInfo():
     info = f"""
@@ -91,13 +98,40 @@ def getSysInfo():
 """
     return info
 
-def restart():
+def restart() -> None:
     """ Restarts the bot fully """
     # NOTE: For anyone curious, `os.execv()` replaces the current process with new one 
     os.execv(sys.executable, ['python3'] + sys.argv)
 
-def update():
+def update() -> None:
     """ Update the bot's files using `git pull` """
     os.system("git pull")
+
+# EXTRA STUFF
+def gendocs(aSortedCMD: list) -> list[str]:
+    result = list()
+
+    if os.path.isfile(gendocsPath):
+        os.remove(gendocsPath)
+        gendocs(aSortedCMD)
+
+    with open(gendocsPath, 'w') as docfile:
+        docfile.write('<!-- Generated docs for GitHub pages -->')
+        for line in aSortedCMD:
+            htmlCommandTemplate = f"""
+<!-- {line.name}@{line.cog_name} -->
+<div class="command-content">
+    <p class="name">{line.name}</p>
+    <div class="desc">
+        <p class="aliases">{line.aliases if len(line.aliases) != 0 else ""}</p>
+        <p class="cog">{line.cog_name}</p>
+        <p class="help">{line.help}</p>
+    </div>
+</div>
+            """
+            docfile.write(htmlCommandTemplate)
+            result.append(htmlCommandTemplate)
+            
+    return result
 
 dictConfig(LOGGING_CONFIG)

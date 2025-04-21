@@ -11,8 +11,8 @@ class Network(commands.Cog):
         self.bot = bot
 
     @commands.command(
-        help="Get bot's ping in ms",
-        brief="Simple Ping."
+        help="Get bot's ping in milliseconds.",
+        brief="Simple Ping. OHMAGAH"
     )
     async def ping(self, ctx):
         await ctx.send(f"🏓 In `{str(self.bot.latency)[:4]} ms`.")
