@@ -11,21 +11,20 @@ from datetime import datetime
 
 import settings
 
+# NOTE: @commands.is_owner() doesn't work
+
 logger = settings.logging.getLogger("bot")
 
 class Owner(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-
-    # NOTE: @commands.is_owner() doesn't work
     @commands.command(
         help="Show bot's server specs."
     )
     async def info(self, ctx):
-        author = ctx.message.author
-        if author.id in settings.OWNER:
-            await ctx.send(settings.getSysInfo())
+        if ctx.message.author.id not in settings.OWNER: return
+        await ctx.send(settings.getSysInfo())
 
 
     @commands.command(
@@ -67,10 +66,9 @@ class Owner(commands.Cog):
         brief="Show bot uptime."
     )
     async def uptime(self, ctx):
-        author = ctx.message.author
-        if author in settings.OWNER:
-            # TODO: Format uptime to XX days, YY hours and ZZ minutes
-            await ctx.send(f'❕ Bot uptime is : `{datetime.now() - startTime}`')
+        if ctx.message.author.id not in settings.OWNER: return
+        # TODO: Format uptime to XX days, YY hours and ZZ minutes
+        await ctx.send(f'❕ Bot uptime is : `{datetime.now() - startTime}`')
 
 
     @commands.command(
@@ -78,19 +76,19 @@ class Owner(commands.Cog):
         aliases=['r']
     )
     async def reload(self, ctx, arg = None):
-        author = ctx.message.author
-        if author.id in settings.OWNER: 
-            os.system("clear")
-            if arg == "update": settings.update()
-            await ctx.send("Restarting and updating bot ..." if arg is not None else "Restarting bot ...")
-            logger.info("Restarting and updating bot." if arg is not None else "Restarting bot.")
-            settings.restart()
+        if ctx.message.author.id not in settings.OWNER: return
+        os.system("clear")
+        if arg == "update": settings.update()
+        await ctx.send("Restarting and updating bot ..." if arg is not None else "Restarting bot ...")
+        logger.info("Restarting and updating bot." if arg is not None else "Restarting bot.")
+        settings.restart()
 
     @commands.command(
         help="Sets the bot version. Doesn't work yet lmao",
         aliases=['sv', 'sver']
     )
     async def setversion(self, ctx, newVer = None) -> None:
+        if ctx.message.author.id not in settings.OWNER: return
         oldVer = settings.VER
 
         if newVer is not None:

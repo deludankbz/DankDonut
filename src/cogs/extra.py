@@ -1,9 +1,11 @@
 # Copyright (c) 2025 deludank. All Rights Reserved.
 # Stuff that usually don't fit inside of other cogs goes here
 
-import settings
+import discord
 from operator import attrgetter
 from discord.ext import commands
+
+import settings
 
 logger = settings.logging.getLogger("bot")
 
@@ -17,10 +19,8 @@ class Docs(commands.Cog):
         aliases=['gd']
     )
     async def generatedoc(self, ctx):
+        if ctx.message.author.id not in settings.OWNER: return
         await ctx.send(f"Generating documentation...")
-        cmdnames = list()
-        cog_names = list(self.bot.cogs)
-
 
         alphaSortedCMD = list()
         for command in sorted(self.bot.commands, key=attrgetter('name')):
@@ -28,6 +28,7 @@ class Docs(commands.Cog):
 
         settings.gendocs(alphaSortedCMD)
         logger.info(f'Generated new documentation files @ {settings.gendocsPath}')
+        await ctx.send(f"## :notepad_spiral: Generated docs", file=discord.File(r'logs/gendocs.html'))
 
 
 async def setup(bot):
