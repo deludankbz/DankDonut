@@ -22,6 +22,13 @@ BASE_DIR = Path(__file__).parent
 COG_DIR = BASE_DIR / "cogs/"
 CHATSOUNDS_DIR = 'extra/chatsounds/'
 
+# Voice Chat shit
+FFMPEG_OPS = { 
+    "before_options": "-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5", 
+    "options": "-vn"
+}
+YT_OPS = { 'format': 'bestaudio', 'noplaylist': True }
+
 # LOGGING
 LOGGING_CONFIG = {
     "version": 1,
